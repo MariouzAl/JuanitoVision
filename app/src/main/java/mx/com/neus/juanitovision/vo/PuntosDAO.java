@@ -1,9 +1,11 @@
 package mx.com.neus.juanitovision.vo;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +51,24 @@ public class PuntosDAO {
         return listaPuntos;
     }
 
+    public void insertAgencias(ArrayList<Punto> agencias) {
+        open();
+        ContentValues values=new ContentValues();
+        database.delete(PuntoDBHelper.PuntosContract.TABLE_NAME, null, null);
+        long startTime = System.currentTimeMillis();
+        for (Punto agenciaRAItem : agencias) {
+            Punto agencia= (Punto) agenciaRAItem;
+            values.put(PuntoDBHelper.PuntosContract.LATITUD, agencia.getLatitud());
+            values.put(PuntoDBHelper.PuntosContract.LONGITUD, agencia.getLongitud());
+            values.put(PuntoDBHelper.PuntosContract.NOMBRE, agencia.getNombre());
+            database.insert(PuntoDBHelper.PuntosContract.TABLE_NAME, null, values);
+        }
+        long diff = System.currentTimeMillis() - startTime;
+        Log.d("Insert sencillo", Long.toString(diff));
+        dbHelper.close();
+        getAllPuntos();
+    }
+
     private Punto cursorToPunto(Cursor cursor) {
         Punto punto = new Punto();
         punto.setId(cursor.getInt(0));
@@ -57,23 +77,5 @@ public class PuntosDAO {
         punto.setNombre(cursor.getString(3));
         return punto;
     }
-
-    public  ArrayList<Punto> getAgenciasBy(String param){
-        ArrayList<Punto> listaPuntos = new ArrayList<Punto>();
-        open();
-        Cursor cursor = database.rawQuery(SELECT_BY_PARAM_QUERY,new String[]{param,"%"+param+"%"});
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
-                Punto punto = cursorToPunto(cursor);
-                listaPuntos.add(punto);
-                cursor.moveToNext();
-            }
-        }
-        cursor.close();
-        dbHelper.close();
-        return listaPuntos;
-    }
-
-
 
 }
