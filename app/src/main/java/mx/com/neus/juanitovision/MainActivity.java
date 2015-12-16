@@ -20,6 +20,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -260,12 +261,15 @@ public class MainActivity extends AppCompatActivity implements
             // geofences enables the Add Geofences button.
             setButtonsEnabledState();
 
-            Toast.makeText(
+            /*Toast.makeText(
                     this,
                     getString(mGeofencesAdded ? R.string.geofences_added :
                             R.string.geofences_removed),
                     Toast.LENGTH_SHORT
-            ).show();
+            ).show();*/
+            Snackbar.make(null, getString(mGeofencesAdded ? R.string.geofences_added :
+                    R.string.geofences_removed), Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         } else {
             // Get the status code for the error and log it using a user-friendly message.
             String errorMessage = GeofenceErrorMessages.getErrorString(this,
