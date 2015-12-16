@@ -5,6 +5,9 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by juan on 12/15/15.
  */
@@ -29,7 +32,7 @@ public class PuntosDAO {
     public void open() throws SQLException {
         database = dbHelper.getWritableDatabase();
     }
-    public  List<Punto> getAllPuntos(){
+    public List<Punto> getAllPuntos(){
         ArrayList<Punto> listaPuntos = new ArrayList<Punto>();
         open();
         Cursor cursor = database.query(PuntoDBHelper.PuntosContract.TABLE_NAME, allColumns, null, null, null, null, null);
@@ -46,7 +49,7 @@ public class PuntosDAO {
         return listaPuntos;
     }
 
-    private Punto cursorToAgencia(Cursor cursor) {
+    private Punto cursorToPunto(Cursor cursor) {
         Punto punto = new Punto();
         punto.setId(cursor.getInt(0));
         punto.setLatitud(cursor.getDouble(1));
