@@ -17,7 +17,7 @@ import mx.com.neus.juanitovision.vo.Punto;
 import mx.com.neus.juanitovision.vo.PuntosDAO;
 
 public class ListaPuntosActivity extends AppCompatActivity {
-    PuntosDAO dao;
+    private  PuntosDAO dao;
     Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
