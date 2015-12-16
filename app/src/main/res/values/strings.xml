@@ -6,4 +6,18 @@
     <string name="latitud">Latitud</string>
     <string name="nombre">nombre</string>
     <string name="title_activity_lista_puntos">Lista de Puntos</string>
+    <string name="geofence_not_available">GEOFENCE_NOT_AVAILABLE</string>
+    <string name="geofence_too_many_geofences">GEOFENCE_TOO_MANY_GEOFENCES</string>
+    <string name="geofence_too_many_pending_intents">GEOFENCE_TOO_MANY_PENDING_INTENTS</string>
+    <string name="unknown_geofence_error">unknown_geofence_error</string>
+    <string name="geofence_transition_invalid_type">geofence_transition_invalid_type</string>
+    <string name="geofence_transition_notification_text">geofence_transition_notification_text</string>
+    <string name="geofence_transition_entered">GEOFENCE_TRANSITION_ENTER</string>
+    <string name="geofence_transition_exited">GEOFENCE_TRANSITION_EXIT</string>
+    <string name="unknown_geofence_transition">unknown_geofence_transition</string>
+    <string name="add_geofences">Iniciar Tracking</string>
+    <string name="remove_geofences">Detener Tracking</string>
+    <string name="not_connected">No conectada</string>
+    <string name="geofences_added">geofences_added</string>
+    <string name="geofences_removed">geofences_removed</string>
 </resources>
