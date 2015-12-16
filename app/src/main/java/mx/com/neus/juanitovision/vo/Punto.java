@@ -25,4 +25,16 @@ public class Punto {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public double getLatitud() {
+        return latitud;
+    }
+
+    public double getLongitud() {
+        return longitud;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
 }
