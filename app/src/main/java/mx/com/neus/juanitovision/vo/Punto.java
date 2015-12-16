@@ -1,4 +1,4 @@
-package mx.com.neus.juanitovision;
+package mx.com.neus.juanitovision.vo;
 
 /**
  * Created by juan on 12/16/15.

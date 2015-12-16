@@ -1,4 +1,4 @@
-package mx.com.neus.juanitovision;
+package mx.com.neus.juanitovision.vo;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -16,7 +16,7 @@ public class PuntosDAO {
     private SQLiteDatabase database;
     private PuntosDBHelper dbHelper;
 
-    private static final String SELECT_ALL = "";
+    private static final String SELECT_BY_PARAM_QUERY = "";
     private static final String SELECT_BY_ID = "";
 
     private String[] allColumns={
@@ -57,5 +57,23 @@ public class PuntosDAO {
         punto.setNombre(cursor.getString(3));
         return punto;
     }
+
+    public  ArrayList<Punto> getAgenciasBy(String param){
+        ArrayList<Punto> listaPuntos = new ArrayList<Punto>();
+        open();
+        Cursor cursor = database.rawQuery(SELECT_BY_PARAM_QUERY,new String[]{param,"%"+param+"%"});
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                Punto punto = cursorToPunto(cursor);
+                listaPuntos.add(punto);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        dbHelper.close();
+        return listaPuntos;
+    }
+
+
 
 }

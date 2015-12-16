@@ -1,4 +1,4 @@
-package mx.com.neus.juanitovision;
+package mx.com.neus.juanitovision.vo;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
