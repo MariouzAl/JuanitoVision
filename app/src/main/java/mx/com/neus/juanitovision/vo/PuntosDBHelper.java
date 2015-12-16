@@ -1,8 +1,12 @@
 package mx.com.neus.juanitovision.vo;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 /**
  * Created by juan on 12/15/15.
@@ -29,4 +33,5 @@ public class PuntosDBHelper extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         PuntoDBHelper.onDowngrade(db);
     }
+
 }

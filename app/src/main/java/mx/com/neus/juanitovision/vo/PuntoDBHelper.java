@@ -2,6 +2,7 @@ package mx.com.neus.juanitovision.vo;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 /**
  * Created by juan on 12/15/15.

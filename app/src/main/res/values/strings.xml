@@ -4,4 +4,6 @@
     <string name="title_activity_puntos_configuration">PuntosConfigurationActivity</string>
     <string name="logitud">Longitud</string>
     <string name="latitud">Latitud</string>
+    <string name="nombre">nombre</string>
+    <string name="title_activity_lista_puntos">Lista de Puntos</string>
 </resources>

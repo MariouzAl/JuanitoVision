@@ -34,7 +34,7 @@ public class PuntosDAO {
     public void open() throws SQLException {
         database = dbHelper.getWritableDatabase();
     }
-    public List<Punto> getAllPuntos(){
+    public ArrayList<Punto> getAllPuntos(){
         ArrayList<Punto> listaPuntos = new ArrayList<Punto>();
         open();
         Cursor cursor = database.query(PuntoDBHelper.PuntosContract.TABLE_NAME, allColumns, null, null, null, null, null);
@@ -51,22 +51,22 @@ public class PuntosDAO {
         return listaPuntos;
     }
 
-    public void insertAgencias(ArrayList<Punto> agencias) {
+    public boolean insertPunto(Punto punto) {
         open();
         ContentValues values=new ContentValues();
-        database.delete(PuntoDBHelper.PuntosContract.TABLE_NAME, null, null);
-        long startTime = System.currentTimeMillis();
-        for (Punto agenciaRAItem : agencias) {
-            Punto agencia= (Punto) agenciaRAItem;
-            values.put(PuntoDBHelper.PuntosContract.LATITUD, agencia.getLatitud());
-            values.put(PuntoDBHelper.PuntosContract.LONGITUD, agencia.getLongitud());
-            values.put(PuntoDBHelper.PuntosContract.NOMBRE, agencia.getNombre());
-            database.insert(PuntoDBHelper.PuntosContract.TABLE_NAME, null, values);
-        }
-        long diff = System.currentTimeMillis() - startTime;
-        Log.d("Insert sencillo", Long.toString(diff));
+
+            values.put(PuntoDBHelper.PuntosContract.LATITUD, punto.getLatitud());
+            values.put(PuntoDBHelper.PuntosContract.LONGITUD, punto.getLongitud());
+            values.put(PuntoDBHelper.PuntosContract.NOMBRE, punto.getNombre());
+            Long res = database.insert(PuntoDBHelper.PuntosContract.TABLE_NAME, null, values);
+        Log.d("Insert sencillo", "Todo OK");
+
         dbHelper.close();
-        getAllPuntos();
+        if(res<0){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     private Punto cursorToPunto(Cursor cursor) {

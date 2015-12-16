@@ -33,6 +33,14 @@
         android:inputType="numberDecimal"
         />
 
+    <android.support.v7.widget.AppCompatEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nombre"
+        android:hint="@string/nombre"
+        android:inputType="text"
+        />
+
     <fragment
 
         android:id="@+id/map"

@@ -10,6 +10,12 @@ public class Punto {
     private double longitud;
     private String nombre;
 
+    @Override
+    public String toString() {
+        String punto = this.nombre + ": latitud = " + this.latitud + " longitud = " + this.longitud;
+        return punto;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
