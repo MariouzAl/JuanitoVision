@@ -1,0 +1,32 @@
+package mx.com.neus.juanitovision;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+/**
+ * Created by juan on 12/15/15.
+ */
+public class PuntosDBHelper extends SQLiteOpenHelper {
+    private static final String DATABASE_NAME = "TarjadoRA.db";
+    private static final int DATABASE_VERSION = 1;
+
+    public PuntosDBHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        PuntoDBHelper.onCreate(db);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        PuntoDBHelper.onUpgrade(db);
+    }
+
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        PuntoDBHelper.onDowngrade(db);
+    }
+}
