@@ -3,21 +3,25 @@ package mx.com.neus.juanitovision;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class PuntosConfigurationActivity extends AppCompatActivity {
-    AppCompatEditText logitud;
-    AppCompatEditText latitud;
+import com.google.android.gms.maps.GoogleMap;
+
+public class PuntosConfigurationActivity extends FragmentActivity {
+    private AppCompatEditText logitud;
+    private AppCompatEditText latitud;
+    private GoogleMap mMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puntos_configuration);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+  //      Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
         logitud= (AppCompatEditText) findViewById(R.id.logitud);
         latitud= (AppCompatEditText) findViewById(R.id.latitud);
 
