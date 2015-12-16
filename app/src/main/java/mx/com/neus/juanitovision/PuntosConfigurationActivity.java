@@ -9,9 +9,16 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-public class PuntosConfigurationActivity extends FragmentActivity {
+public class PuntosConfigurationActivity extends FragmentActivity  implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
     private AppCompatEditText logitud;
     private AppCompatEditText latitud;
     private GoogleMap mMap;
@@ -24,6 +31,9 @@ public class PuntosConfigurationActivity extends FragmentActivity {
 //        setSupportActionBar(toolbar);
         logitud= (AppCompatEditText) findViewById(R.id.logitud);
         latitud= (AppCompatEditText) findViewById(R.id.latitud);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -36,6 +46,31 @@ public class PuntosConfigurationActivity extends FragmentActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in Sydney and move the camera
+//        LatLng sydney = new LatLng(19.173773, -96.134224);
+         LatLngBounds VERACRUZ = new LatLngBounds(
+                new LatLng(19.2027248,-96.1642877), new LatLng(19.2027248,-96.1642877));
+        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(VERACRUZ.getCenter(), 15));
+        mMap.setOnMapLongClickListener(this);
+    }
+
+
+    @Override
+    public void onMapLongClick(LatLng point) {
+        this.latitud.setText(String.valueOf(point.latitude));
+        this.logitud.setText(String.valueOf(point.longitude));
+        mMap.clear();
+        mMap.addMarker(new MarkerOptions()
+                .position(point)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+    }
 }
