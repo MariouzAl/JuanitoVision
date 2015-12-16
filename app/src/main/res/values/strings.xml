@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">JuanitoVision</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_puntos_configuration">PuntosConfigurationActivity</string>
+    <string name="logitud">Longitud</string>
+    <string name="latitud">Latitud</string>
 </resources>
