@@ -24,4 +24,6 @@
     <string name="title_activity_preferencias">Preferencias</string>
     <string name="phone_number">2291234567</string>
     <string name="mensaje">Estoy cerca de:</string>
+    <string name="preferencias">Preferencias</string>
+
 </resources>
