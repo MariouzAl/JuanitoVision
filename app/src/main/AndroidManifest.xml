@@ -41,7 +41,7 @@
         <activity
             android:name=".PuntosConfigurationActivity"
             android:label="@string/title_activity_puntos_configuration"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme">
         </activity>
         <activity
             android:name=".ListaPuntosActivity"
