@@ -59,12 +59,13 @@ public class PuntosDAO {
             values.put(PuntoDBHelper.PuntosContract.LONGITUD, punto.getLongitud());
             values.put(PuntoDBHelper.PuntosContract.NOMBRE, punto.getNombre());
             Long res = database.insert(PuntoDBHelper.PuntosContract.TABLE_NAME, null, values);
-        Log.d("Insert sencillo", "Todo OK");
 
         dbHelper.close();
         if(res<0){
+            Log.d("Insert sencillo", "Todo ERROR");
             return false;
         }else{
+            Log.d("Insert sencillo", "Todo OK");
             return true;
         }
     }

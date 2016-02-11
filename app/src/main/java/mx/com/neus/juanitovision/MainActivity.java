@@ -358,12 +358,15 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case R.id.preferencias:
-                Intent intent =  new Intent(getApplicationContext(),Preferencias.class);
+                intent =  new Intent(getApplicationContext(),Preferencias.class);
                 startActivity(intent);
-
-                Log.d("JUANITO SI JALÓ", item.getTitle().toString());
+                return true;
+            case R.id.config:
+                intent =  new Intent(getApplicationContext(),ListaPuntosActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

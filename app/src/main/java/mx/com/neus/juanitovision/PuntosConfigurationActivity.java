@@ -18,10 +18,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import mx.com.neus.juanitovision.vo.Punto;
+import mx.com.neus.juanitovision.vo.PuntosDAO;
+
 public class PuntosConfigurationActivity extends FragmentActivity  implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
     private AppCompatEditText logitud;
     private AppCompatEditText latitud;
+    private AppCompatEditText nombre;
     private GoogleMap mMap;
+    private PuntosDAO dao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -31,19 +36,25 @@ public class PuntosConfigurationActivity extends FragmentActivity  implements On
 //        setSupportActionBar(toolbar);
         logitud = (AppCompatEditText) findViewById(R.id.logitud);
         latitud = (AppCompatEditText) findViewById(R.id.latitud);
+        nombre = (AppCompatEditText) findViewById(R.id.nombre);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
+        dao= new PuntosDAO(this);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String longitudText = logitud.getText().toString();
                 String latitudText = logitud.getText().toString();
-
+                Punto punto = new Punto();
+                punto.setLatitud(Double.parseDouble(latitudText));
+                punto.setLongitud(Double.parseDouble(longitudText));
+                punto.setNombre(nombre.getText().toString());
+                dao.insertPunto(punto);
                 Snackbar.make(view, "Longitud "+longitudText+" Latitud: "+ latitudText  , Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
             }
         });
 
