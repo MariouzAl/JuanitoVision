@@ -22,4 +22,5 @@
     <string name="geofences_removed">geofences_removed</string>
     <string name="title_activity_propiedades">Propiedades</string>
     <string name="title_activity_preferencias">Preferencias</string>
+    <string name="preferencias">Preferencias</string>
 </resources>

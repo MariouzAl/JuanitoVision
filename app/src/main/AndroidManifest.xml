@@ -50,6 +50,12 @@
 
         </activity>
         <activity
+            android:name=".Preferencias"
+            android:label="@string/preferencias"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_puntos_configuration"
             android:theme="@style/AppTheme">

@@ -38,6 +38,7 @@ import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.internal.in;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingApi;
 import com.google.android.gms.location.GeofencingRequest;
@@ -359,7 +360,10 @@ public class MainActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.preferencias:
-                Log.d("JUANITO SI JALÓ",item.getTitle().toString());
+                Intent intent =  new Intent(getApplicationContext(),Preferencias.class);
+                startActivity(intent);
+
+                Log.d("JUANITO SI JALÓ", item.getTitle().toString());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
