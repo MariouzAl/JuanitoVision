@@ -1,5 +1,6 @@
 package mx.com.neus.juanitovision;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -7,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,6 +29,7 @@ public class PuntosConfigurationActivity extends FragmentActivity  implements On
     private AppCompatEditText nombre;
     private GoogleMap mMap;
     private PuntosDAO dao;
+    private Activity activity= this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -51,9 +54,16 @@ public class PuntosConfigurationActivity extends FragmentActivity  implements On
                 punto.setLatitud(Double.parseDouble(latitudText));
                 punto.setLongitud(Double.parseDouble(longitudText));
                 punto.setNombre(nombre.getText().toString());
-                dao.insertPunto(punto);
-                Snackbar.make(view, "Longitud "+longitudText+" Latitud: "+ latitudText  , Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                boolean  success = dao.insertPunto(punto);
+                if(success){
+                    activity.finish();
+                    Snackbar.make(view, "Longitud "+longitudText+" Latitud: "+ latitudText  , Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+
+                }else{
+                    Snackbar.make(view, "ERROR AGREGANDO NUEVO PUNTO", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
 
             }
         });
