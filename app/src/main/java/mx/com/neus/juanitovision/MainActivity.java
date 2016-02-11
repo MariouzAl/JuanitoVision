@@ -359,6 +359,8 @@ public class MainActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.preferencias:
+                Intent i = new Intent(MainActivity.this, Preferencias.class);
+                startActivity(i);
                 Log.d("JUANITO SI JALÓ",item.getTitle().toString());
                 return true;
             default:

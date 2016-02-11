@@ -44,6 +44,11 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
+            android:name=".Preferencias"
+            android:label="@string/title_activity_preferencias"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
             android:name=".ListaPuntosActivity"
             android:label="@string/title_activity_lista_puntos"
             android:theme="@style/AppTheme.NoActionBar">
