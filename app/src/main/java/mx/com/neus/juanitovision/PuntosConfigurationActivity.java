@@ -48,6 +48,10 @@ public class PuntosConfigurationActivity extends FragmentActivity  implements On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                click(view);
+            }
+
+            private void click(View view) {
                 String longitudText = logitud.getText().toString();
                 String latitudText = logitud.getText().toString();
                 Punto punto = new Punto();
@@ -56,20 +60,22 @@ public class PuntosConfigurationActivity extends FragmentActivity  implements On
                 punto.setNombre(nombre.getText().toString());
                 boolean  success = dao.insertPunto(punto);
                 if(success){
-                    activity.finish();
-                    Snackbar.make(view, "Longitud "+longitudText+" Latitud: "+ latitudText  , Snackbar.LENGTH_LONG)
+                    setResult(Activity.RESULT_OK);
+                    finishActivity(Constants.AGREGAR_PUNTOS);
+                    finish();
+                    Snackbar.make(view, "Longitud " + longitudText + " Latitud: " + latitudText, Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
 
                 }else{
                     Snackbar.make(view, "ERROR AGREGANDO NUEVO PUNTO", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
-
             }
         });
 
 
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

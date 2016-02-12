@@ -25,6 +25,8 @@ import java.util.HashMap;
  */
 public final class Constants {
 
+    public static final int AGREGAR_PUNTOS = 1;
+
     private Constants() {
     }
 
