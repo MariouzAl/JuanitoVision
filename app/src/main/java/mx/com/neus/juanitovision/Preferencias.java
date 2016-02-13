@@ -19,9 +19,12 @@ public class Preferencias extends AppCompatActivity {
         setContentView(R.layout.activity_preferencias);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        SharedPreferences prefer = getSharedPreferences("XD", MODE_PRIVATE);
         final AppCompatEditText phoneNumber = (AppCompatEditText) findViewById(R.id.phone_number);
         final AppCompatEditText message = (AppCompatEditText) findViewById(R.id.mensaje);
+
+        message.setText(prefer.getString("UserMessage",""));
+        phoneNumber.setText(prefer.getString("UserPhone",""));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
