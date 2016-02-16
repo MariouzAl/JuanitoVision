@@ -53,7 +53,7 @@ public class PuntosConfigurationActivity extends FragmentActivity  implements On
 
             private void click(View view) {
                 String longitudText = logitud.getText().toString();
-                String latitudText = logitud.getText().toString();
+                String latitudText = latitud.getText().toString();
                 Punto punto = new Punto();
                 punto.setLatitud(Double.parseDouble(latitudText));
                 punto.setLongitud(Double.parseDouble(longitudText));
