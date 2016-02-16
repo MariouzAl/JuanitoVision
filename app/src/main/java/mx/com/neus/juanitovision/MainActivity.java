@@ -48,6 +48,9 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 import java.util.Map;
 
+import mx.com.neus.juanitovision.vo.Punto;
+import mx.com.neus.juanitovision.vo.PuntosDAO;
+
 /**
  * Demonstrates how to create and remove geofences using the GeofencingApi. Uses an IntentService
  * to monitor geofence transitions and creates notifications whenever a device enters or exits
@@ -306,17 +309,22 @@ public class MainActivity extends AppCompatActivity implements
      * the user's location.
      */
     public void populateGeofenceList() {
-        for (Map.Entry<String, LatLng> entry : Constants.BAY_AREA_LANDMARKS.entrySet()) {
+        //TODO: consultar el DAO de puntos
+        PuntosDAO paipai=new PuntosDAO(this);
+        ArrayList<Punto> listaPuntos = paipai.getAllPuntos();
+
+        for (Punto punto: listaPuntos) {
+
 
             mGeofenceList.add(new Geofence.Builder()
                     // Set the request ID of the geofence. This is a string to identify this
                     // geofence.
-                    .setRequestId(entry.getKey())
+                    .setRequestId(punto.getKey())
 
                     // Set the circular region of this geofence.
                     .setCircularRegion(
-                            entry.getValue().latitude,
-                            entry.getValue().longitude,
+                            punto.getLatitud(),
+                            punto.getLongitud(),
                             Constants.GEOFENCE_RADIUS_IN_METERS
                     )
 

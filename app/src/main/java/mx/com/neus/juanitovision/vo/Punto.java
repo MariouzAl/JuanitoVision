@@ -43,4 +43,8 @@ public class Punto {
     public String getNombre() {
         return nombre;
     }
+
+    public String getKey() {
+        return id+"";
+    }
 }
