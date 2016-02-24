@@ -269,15 +269,15 @@ public class MainActivity extends AppCompatActivity implements
             // geofences enables the Add Geofences button.
             setButtonsEnabledState();
 
-            /*Toast.makeText(
+            Toast.makeText(
                     this,
                     getString(mGeofencesAdded ? R.string.geofences_added :
                             R.string.geofences_removed),
                     Toast.LENGTH_SHORT
-            ).show();*/
-            Snackbar.make(null, getString(mGeofencesAdded ? R.string.geofences_added :
+            ).show();
+            /*Snackbar.make(null, getString(mGeofencesAdded ? R.string.geofences_added :
                     R.string.geofences_removed), Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+                    .setAction("Action", null).show();*/
         } else {
             // Get the status code for the error and log it using a user-friendly message.
             String errorMessage = GeofenceErrorMessages.getErrorString(this,
