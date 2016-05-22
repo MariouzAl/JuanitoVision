@@ -8,7 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
-import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.View;
 
 public class Preferencias extends AppCompatActivity {
@@ -34,7 +33,7 @@ public class Preferencias extends AppCompatActivity {
                 String mensaje = message.getText().toString();
                 salvar(numero, mensaje);
 
-                Intent i = new Intent(Preferencias.this, MainActivity.class);
+                Intent i = new Intent(Preferencias.this, MainActivityFragment.class);
                 startActivity(i);
 
                 Snackbar.make(view, "Se ha guardado Exitósamente" + numero, Snackbar.LENGTH_LONG)

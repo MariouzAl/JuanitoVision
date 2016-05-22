@@ -31,40 +31,44 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
         <activity
             android:name=".PuntosConfigurationActivity"
             android:label="@string/title_activity_puntos_configuration"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Preferencias"
             android:label="@string/title_activity_preferencias"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ListaPuntosActivity"
             android:label="@string/title_activity_lista_puntos"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".MainActivityFragment"
             android:label="@string/title_activity_puntos_configuration"
             android:theme="@style/AppTheme">
+
+        </activity>
+
+        <service android:name=".GeofenceTransitionsIntentService" />
+
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".GeofenceTransitionsIntentService" />
     </application>
 
 </manifest>

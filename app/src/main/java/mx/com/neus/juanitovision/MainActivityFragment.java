@@ -16,22 +16,21 @@
 
 package mx.com.neus.juanitovision;
 
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.internal.view.SupportMenuInflater;
+import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
@@ -65,7 +64,7 @@ import mx.com.neus.juanitovision.vo.PuntosDAO;
  * {@link com.google.android.gms.location.GeofencingApi#removeGeofences(GoogleApiClient, java.util.List)}  removeGeofences()}
  * becomes available.
  */
-public class MainActivity extends AppCompatActivity implements
+public class MainActivityFragment extends Fragment implements
         ConnectionCallbacks, OnConnectionFailedListener, ResultCallback<Status> {
 
     protected static final String TAG = "MainActivity";
@@ -98,15 +97,17 @@ public class MainActivity extends AppCompatActivity implements
     // Buttons for kicking off the process of adding or removing geofences.
     private Button mAddGeofencesButton;
     private Button mRemoveGeofencesButton;
-
+    private Activity mActivity;
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
 
+        View fragmentView = inflater.inflate(R.layout.main_activity,container,false);
+        this.mActivity=getActivity();
         // Get the UI widgets.
-        mAddGeofencesButton = (Button) findViewById(R.id.add_geofences_button);
-        mRemoveGeofencesButton = (Button) findViewById(R.id.remove_geofences_button);
+        mAddGeofencesButton = (Button) fragmentView.findViewById(R.id.add_geofences_button);
+        mRemoveGeofencesButton = (Button) fragmentView.findViewById(R.id.remove_geofences_button);
 
         // Empty list for storing geofences.
         mGeofenceList = new ArrayList<Geofence>();
@@ -115,8 +116,8 @@ public class MainActivity extends AppCompatActivity implements
         mGeofencePendingIntent = null;
 
         // Retrieve an instance of the SharedPreferences object.
-        mSharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES_NAME,
-                MODE_PRIVATE);
+        mSharedPreferences = mActivity.getSharedPreferences(Constants.SHARED_PREFERENCES_NAME,
+                mActivity.MODE_PRIVATE);
 
         // Get the value of mGeofencesAdded from SharedPreferences. Set to false as a default.
         mGeofencesAdded = mSharedPreferences.getBoolean(Constants.GEOFENCES_ADDED_KEY, false);
@@ -127,13 +128,15 @@ public class MainActivity extends AppCompatActivity implements
 
         // Kick off the request to build GoogleApiClient.
         buildGoogleApiClient();
+
+        return fragmentView;
     }
 
     /**
      * Builds a GoogleApiClient. Uses the {@code #addApi} method to request the LocationServices API.
      */
     protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+        mGoogleApiClient = new GoogleApiClient.Builder(mActivity)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
@@ -141,13 +144,13 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         mGoogleApiClient.disconnect();
     }
@@ -200,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements
      */
     public void addGeofencesButtonHandler(View view) {
         if (!mGoogleApiClient.isConnected()) {
-            Toast.makeText(this, getString(R.string.not_connected), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity, getString(R.string.not_connected), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -226,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements
      */
     public void removeGeofencesButtonHandler(View view) {
         if (!mGoogleApiClient.isConnected()) {
-            Toast.makeText(this, getString(R.string.not_connected), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mActivity, getString(R.string.not_connected), Toast.LENGTH_SHORT).show();
             return;
         }
         try {
@@ -270,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements
             setButtonsEnabledState();
 
             Toast.makeText(
-                    this,
+                    mActivity,
                     getString(mGeofencesAdded ? R.string.geofences_added :
                             R.string.geofences_removed),
                     Toast.LENGTH_SHORT
@@ -280,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements
                     .setAction("Action", null).show();*/
         } else {
             // Get the status code for the error and log it using a user-friendly message.
-            String errorMessage = GeofenceErrorMessages.getErrorString(this,
+            String errorMessage = GeofenceErrorMessages.getErrorString(mActivity,
                     status.getStatusCode());
             Log.e(TAG, errorMessage);
         }
@@ -298,10 +301,10 @@ public class MainActivity extends AppCompatActivity implements
         if (mGeofencePendingIntent != null) {
             return mGeofencePendingIntent;
         }
-        Intent intent = new Intent(this, GeofenceTransitionsIntentService.class);
+        Intent intent = new Intent(mActivity, GeofenceTransitionsIntentService.class);
         // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when calling
         // addGeofences() and removeGeofences().
-        return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        return PendingIntent.getService(mActivity, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     /**
@@ -310,7 +313,7 @@ public class MainActivity extends AppCompatActivity implements
      */
     public void populateGeofenceList() {
         //TODO: consultar el DAO de puntos
-        PuntosDAO paipai=new PuntosDAO(this);
+        PuntosDAO paipai=new PuntosDAO(mActivity);
         ArrayList<Punto> listaPuntos = paipai.getAllPuntos();
 
         for (Punto punto: listaPuntos) {
@@ -357,7 +360,7 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_preferences, menu);
@@ -379,5 +382,5 @@ public class MainActivity extends AppCompatActivity implements
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 }
