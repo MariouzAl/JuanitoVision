@@ -42,7 +42,6 @@ public class ListaPuntosActivity extends AppCompatActivity {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 Intent intent = new Intent(view.getContext(),PuntosConfigurationActivity.class);
-                //intent.putExtra(EXTRA, frases);
                 startActivityForResult(intent, Constants.AGREGAR_PUNTOS);
             }
         });

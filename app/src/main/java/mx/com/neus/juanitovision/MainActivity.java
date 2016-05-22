@@ -243,8 +243,8 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     private void logSecurityException(SecurityException securityException) {
-        Log.e(TAG, "Invalid location permission. " +
-                "You need to use ACCESS_FINE_LOCATION with geofences", securityException);
+        Log.e(TAG, "Permiso de Localización Inválido. " +
+                "Necesitas Usar ACCESS_FINE_LOCATION con geofences", securityException);
     }
 
     /**
