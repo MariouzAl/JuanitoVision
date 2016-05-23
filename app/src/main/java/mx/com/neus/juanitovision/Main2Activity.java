@@ -81,14 +81,18 @@ public class Main2Activity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Fragment juanitogFragmento;
-         if (id == R.id.nav_slideshow) {
-         juanitogFragmento = new MainActivityFragment();
-             getSupportFragmentManager().beginTransaction()
-                     .replace(R.id.contenedor, juanitogFragmento).addToBackStack(null).commit();
+        if (id == R.id.nav_slideshow) {
+            juanitogFragmento = new MainActivityFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contenedor, juanitogFragmento).addToBackStack(null).commit();
         } else if (id == R.id.nav_manage) {
-
+            juanitogFragmento = new ListaPuntosFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contenedor, juanitogFragmento).addToBackStack(null).commit();
         } else if (id == R.id.nav_send) {
-
+            juanitogFragmento = new PreferenciasFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contenedor, juanitogFragmento).addToBackStack(null).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

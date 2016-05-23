@@ -43,11 +43,11 @@
             android:label="@string/title_activity_puntos_configuration"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".Preferencias"
+            android:name=".PreferenciasFragment"
             android:label="@string/title_activity_preferencias"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".ListaPuntosActivity"
+            android:name=".ListaPuntosFragment"
             android:label="@string/title_activity_lista_puntos"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity

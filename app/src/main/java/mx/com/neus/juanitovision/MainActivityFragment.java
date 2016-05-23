@@ -24,9 +24,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -37,15 +34,11 @@ import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.internal.in;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingApi;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
-
 import java.util.ArrayList;
-import java.util.Map;
 
 import mx.com.neus.juanitovision.vo.Punto;
 import mx.com.neus.juanitovision.vo.PuntosDAO;
@@ -99,16 +92,32 @@ public class MainActivityFragment extends Fragment implements
     private Button mRemoveGeofencesButton;
     private Activity mActivity;
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.mActivity=activity;
+    }
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreateView(inflater,container,savedInstanceState);
 
-        View fragmentView = inflater.inflate(R.layout.main_activity,container,false);
-        this.mActivity=getActivity();
+        final View fragmentView = inflater.inflate(R.layout.main_activity,container,false);
+        //this.mActivity=getActivity();
         // Get the UI widgets.
         mAddGeofencesButton = (Button) fragmentView.findViewById(R.id.add_geofences_button);
         mRemoveGeofencesButton = (Button) fragmentView.findViewById(R.id.remove_geofences_button);
-
+        mAddGeofencesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addGeofencesButtonHandler(v);
+            }
+        });
+        mRemoveGeofencesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeGeofencesButtonHandler(v);
+            }
+        });
         // Empty list for storing geofences.
         mGeofenceList = new ArrayList<Geofence>();
 
@@ -372,11 +381,11 @@ public class MainActivityFragment extends Fragment implements
         Intent intent;
         switch (item.getItemId()) {
             case R.id.preferencias:
-                intent =  new Intent(getApplicationContext(),Preferencias.class);
+                intent =  new Intent(getApplicationContext(),PreferenciasFragment.class);
                 startActivity(intent);
                 return true;
             case R.id.config:
-                intent =  new Intent(getApplicationContext(),ListaPuntosActivity.class);
+                intent =  new Intent(getApplicationContext(),ListaPuntosFragment.class);
                 startActivity(intent);
                 return true;
             default:
