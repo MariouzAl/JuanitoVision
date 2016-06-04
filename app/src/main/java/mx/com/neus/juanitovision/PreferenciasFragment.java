@@ -56,6 +56,7 @@ public class PreferenciasFragment extends Fragment {
         SharedPreferences.Editor prefEditor = settings.edit();
         prefEditor.putString("UserMessage", mensaje);
         prefEditor.putString("UserPhone", number);
+        prefEditor.putString("Activo", "Inactivo");
         prefEditor.commit();
     }
 

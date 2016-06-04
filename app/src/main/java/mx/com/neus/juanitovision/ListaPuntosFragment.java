@@ -3,6 +3,7 @@ package mx.com.neus.juanitovision;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -47,8 +48,29 @@ public class ListaPuntosFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(context, "Poision "+position, Toast.LENGTH_SHORT).show();
+                SharedPreferences prefer = context.getSharedPreferences("XD", context.MODE_PRIVATE);
+                String activo = prefer.getString("Activo","");
+                if(activo.equals("Activo")){
+                    SharedPreferences.Editor prefEditor = prefer.edit();
+                    prefEditor.putString("Activo","Inactivo");
+                    prefEditor.commit();
+                }
+                else{
+                    SharedPreferences.Editor prefEditor = prefer.edit();
+                    prefEditor.putString("Activo","Activo");
+                    prefEditor.commit();
+                }
+                activo = prefer.getString("Activo","");
+                Snackbar.make(view, "Destino Seleccionado "+activo, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Snackbar.make(view, "Poision "+position, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                return false;
             }
         });
 

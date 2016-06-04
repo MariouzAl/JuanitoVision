@@ -12,7 +12,7 @@ public class Punto {
 
     @Override
     public String toString() {
-        String punto = this.nombre + ": latitud = " + this.latitud + " longitud = " + this.longitud;
+        String punto = this.nombre;
         return punto;
     }
 

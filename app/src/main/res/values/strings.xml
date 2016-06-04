@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">I Coming on...</string>
+    <string name="app_name">Voy en camino con Italika</string>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_puntos_configuration">Configuración De Puntos</string>
+    <string name="title_activity_puntos_configuration">Elige el Punto</string>
     <string name="logitud">Longitud</string>
     <string name="latitud">Latitud</string>
     <string name="nombre">nombre</string>
@@ -22,10 +22,10 @@
     <string name="geofences_removed">geofences_removed</string>
     <string name="title_activity_propiedades">Propiedades</string>
     <string name="title_activity_preferencias">Preferencias</string>
-    <string name="phone_number">Ej. 2291234567</string>
-    <string name="mensaje">Ej. Estoy cerca de:</string>
+    <string name="phone_number">2291234567</string>
+    <string name="mensaje">Estoy cerca de:</string>
     <string name="preferencias">Preferencias</string>
-    <string name="title_activity_main2">Voy llegando</string>
+    <string name="title_activity_main2">Voy en Camino</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

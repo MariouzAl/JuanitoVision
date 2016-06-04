@@ -83,10 +83,11 @@ public class PuntosConfigurationActivity extends FragmentActivity  implements On
 
         // Add a marker in Sydney and move the camera
 //        LatLng sydney = new LatLng(19.173773, -96.134224);
+        LatLngBounds CentroFox = new LatLngBounds(new LatLng(20.978241,-101.695856), new LatLng(20.978241,-101.695856));
         LatLngBounds VERACRUZ = new LatLngBounds(
                 new LatLng(19.2027248,-96.1642877), new LatLng(19.2027248,-96.1642877));
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(VERACRUZ.getCenter(), 10));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(CentroFox.getCenter(), 16));
         mMap.setOnMapLongClickListener(this);
     }
 
